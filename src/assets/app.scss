@@ -1,0 +1,23 @@
+.app-container{
+    padding: 12px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    // align-items: center;
+    // justify-content: center;
+
+    .demo{
+        width: 360px;
+        height: 270px;
+        padding: 12px;
+        border: 1px solid;
+        // box-shadow: 0 0 9px 3px rgba(10, 10, 10, 0.04);
+        border-radius: 9px;
+        margin-right: 9px;
+        margin-bottom: 9px;
+        &.demo-3{
+            width: 730px;
+        }
+    }
+}

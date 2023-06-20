@@ -1,0 +1,75 @@
+.home-container {
+    // width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        height: 8px;
+        width: 8px;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        border-radius: 2px;
+    }
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+    &::-webkit-scrollbar-thumb {
+        width: 8px;
+        min-height: 15px;
+        background: rgba(50,50,50,0.3) !important;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        border-radius: 2px;
+    }
+    .first-screen-container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        .description-container{
+            // border: 1px solid;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            .title{
+                font-size: 75px;
+                font-weight: 800;
+                // width: 100%;
+            }
+            .sub-title{
+                color: #1d2b5a;
+                margin-top: 12px;
+                margin-bottom: 24px;
+                width: 100%;
+            }
+            .btn-link{
+                width: 90px;
+                padding: 9px 12px;
+                // border: 1px solid;
+                border-radius: 30px;
+                text-align: center;
+                cursor: pointer;
+                background-color: rgb(247, 44, 91);
+                color: #fff;
+                &:hover{
+                    box-shadow: 0 0 6px 1px rgba(247, 44, 91, 0.3);
+                }
+            }
+        }
+        .chart-demo{
+            width: 600px;
+            height: 390px;
+            border: 1px solid;
+            margin-left: -300px;
+        }
+        // background-color: red;
+    }
+    .des-container {
+        height: 100%;
+        background-color: aqua;
+    }
+}
