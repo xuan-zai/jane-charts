@@ -1,5 +1,6 @@
 import { getMax, getMin } from './calculate';
 import { isNullObject } from './judgement';
+
 /**
  * 处理标题数据
  * @param {string}  title 标题数据
@@ -111,6 +112,14 @@ const processingAxis = (data, config = {}) => {
                 axis['xAxis'] = [{
                     type: 'value'
                 }]
+            }
+        } else {
+            // 如果没有 x 也没有 y 的话，那么默认 x 的 type 为 category
+            axis['xAxis'] = [{
+                type: 'category'
+            }];
+            axis['yAxis'] = {
+                type: 'value',
             }
         }
     }

@@ -235,7 +235,75 @@ const mock = reactive({
                         },
                         animation: {
                             delay: 300
+                        }
+                    }
+                },
+                {
+                    id: 5,
+                    title: "不传 x 和 y",
+                    version: "5.4.2",
+                    data: {
+                        title: {
+                            text: '不传 x 和 y',
+                            sub: '默认 x.type = category，data 的内容会自动从 series.data 中获取'
                         },
+                        series: {
+                            data: [100, 200, 100, 200, 300]
+                        }
+                    },
+                    config: {
+                        barStyle: {
+                            width: 12,
+                            round: 3,
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(0, 150, 199, 1)'
+                                }, {
+                                    offset: 1, color: 'rgba(255, 255, 255, 0)'
+                                }],
+                            }
+                        },
+                        animation: {
+                            delay: 600
+                        },
+                        axis: {
+                            x: {
+                                show: true, // 控制 x 轴是否显示
+                                lineStyle: {
+                                    show: false, // 是否显示轴线
+                                    color: 'red' // 轴线的颜色
+                                },
+                                tickStyle: {
+                                    show: false
+                                },
+                                labelStyle: {
+                                    show: true,
+                                },
+                                splitLine: {
+                                    show: false
+                                }
+                            },
+                            y: {
+                                show: true, // 控制 y 轴是否显示
+                                lineStyle: {
+                                    show: false, // 是否显示轴线
+                                },
+                                tickStyle: {
+                                    show: false
+                                },
+                                labelStyle: {
+                                    show: false,
+                                },
+                                splitLine: {
+                                    show: false
+                                }
+                            }
+                        }
                     }
                 }
             ]
