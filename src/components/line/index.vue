@@ -1,5 +1,5 @@
 <template>
-    <div class="bar-container" ref="barRef"></div>
+    <div class="line-container" ref="lineRef"></div>
 </template>
   
 <script lang="ts" setup>
@@ -7,7 +7,7 @@ import { ref, onMounted, reactive, watch } from 'vue';
 import * as echarts from 'echarts';
 import processing from '@/utils/processingOptions';
 
-const barRef = ref();
+const lineRef = ref();
 
 // 组件传递过来的数据
 const props = defineProps({
@@ -19,7 +19,7 @@ const props = defineProps({
     // 图表类型
     type: {
         type: String,
-        default: 'bar'
+        default: 'line'
     },
     // 配置项
     config: {
@@ -34,9 +34,10 @@ const state = reactive({
 
 
 onMounted(() => {
-    if (barRef.value) {
-        state.chart = echarts.init(barRef.value);
+    if (lineRef.value) {
+        state.chart = echarts.init(lineRef.value);
         let { type, data, config } = props;
+        console.log(props)
         let options = processing(type, data, config)
         options && state.chart.setOption(options)
     }
