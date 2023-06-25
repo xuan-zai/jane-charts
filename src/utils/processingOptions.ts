@@ -106,21 +106,22 @@ const processingAxis = (data, config = {}) => {
         // 如果没有 x 的话，那么看是否有 y
         if (y) {
             if (y instanceof Array) {
-                axis['yAxis'] = [{
+                axis['yAxis'] = {
                     data: y
-                }];
-                axis['xAxis'] = [{
+                };
+                axis['xAxis'] = {
                     type: 'value'
-                }]
+                }
             }
         } else {
             // 如果没有 x 也没有 y 的话，那么默认 x 的 type 为 category
-            axis['xAxis'] = [{
-                type: 'category'
-            }];
+            axis['xAxis'] = {
+                type: 'category',
+            };
             axis['yAxis'] = {
                 type: 'value',
             }
+            console.log(axis['xAxis'], "axis['xAxis']")
         }
     }
 
@@ -284,7 +285,7 @@ const processingAxis = (data, config = {}) => {
             }
         }
     }
-
+    console.log(axis)
     return axis;
 }
 
