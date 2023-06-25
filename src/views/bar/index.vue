@@ -276,7 +276,6 @@ const mock = reactive({
                                 show: true, // 控制 x 轴是否显示
                                 lineStyle: {
                                     show: false, // 是否显示轴线
-                                    color: 'red' // 轴线的颜色
                                 },
                                 tickStyle: {
                                     show: false
