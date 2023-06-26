@@ -25,7 +25,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if(to.meta && to.meta.title) {
+  if (to.path === '/') {
+    next('/bar')
+  }
+  if (to.meta && to.meta.title) {
     document.title = to.meta.title;
   }
   next();
