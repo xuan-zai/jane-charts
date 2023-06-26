@@ -1,5 +1,6 @@
 import { getMax, getMin } from './calculate';
-import { isNullObject } from './judgement';
+import { isNullObject, judgementType, setAxisStyle } from './judgement';
+import { processingXAxis, processingYAxis } from './axisUtils';
 
 /**
  * 处理标题数据
@@ -7,289 +8,33 @@ import { isNullObject } from './judgement';
  * @param {object}  config 标题配置项
  */
 const processingTitle = (title, config = {}) => {
-    let titleOption = {};
+    // 默认的标题配置
+    const titleOption = {
+        textStyle: {
+            fontSize: 14
+        }
+    };
     // 首先判断是不是空值，空值就直接返回
     if (!title || (typeof title === 'object' && isNullObject(title))) {
         return null;
     }
     // 接下来都是有数据的，在判断是字符串还是对象
-    if (typeof title === 'string') {
-        titleOption = {
-            text: title
-        };
-    } else {
-        const { text = '', sub = '' } = title;
-        titleOption = {
-            text,
-            subtext: sub
-        }
-    }
-    return {
-        ...titleOption,
-        textStyle: {
-            fontSize: 14
-        }
-    };
+    return typeof title === 'string' ? ({ ...titleOption, text: title }) : ({ ...titleOption, text: title.text || '', subtext: title.sub || '' })
 }
 
 
-// 这里其实是相反的，基础的情况下
-// 如果传递了 x，没有传递 y，那么 y 则是 {type: value}
-// 如果传递了 y，没有传递 x，那么 x 则是 {type: value}
-// 还有一种情况，两个都传递了，但是只有一方传递了 data。
+// 对 axis 数据进行处理
 const processingAxis = (data, config = {}) => {
-    const x = data.x;
-    const y = data.y;
+    const { x = null, y = null } = data;
     const axis = {};
-    // 判断有没有 x，这一块是进行数据的处理
-    if (x) {
-        // 有 x 的话，判断是数组还是对象,
-        // 是数组的话，代表着这个数据就是 data
-        if (x instanceof Array) {
-            axis['xAxis'] = {
-                data: x.data || x
-            }
-            if (y && !isNullObject(y)) {
-                axis['yAxis'] = {
-                    type: 'value',
-                    ...y
-                }
-            } else {
-                axis['yAxis'] = {
-                    type: 'value',
-                }
-            }
-        } else {
-            // 如果 x 是对象，那么就需要看 x 中有没有 data
-            const x_data = x.data;
-            if (x_data) {
-                // 如果有 data，说明就是柱状图
-                axis['xAxis'] = {
-                    data: x.data,
-                }
-                // 如果编写了 unitConfig 这个字段，并且不是空值的话，那么就是需要单位
-                if (x.unitConfig && !isNullObject(x.unitConfig)) {
-                    axis['xAxis'].axisLabel = {
-                        formatter: (val) => {
-                            if (x.unitConfig.location === 'before') {
-                                return x.unitConfig.unit + val;
-                            } else {
-                                return val + x.unitConfig.unit;
-                            }
-                        }
-                    }
-                }
-                if (y && !isNullObject(y)) {
-                    axis['yAxis'] = {
-                        type: 'value',
-                        ...y
-                    }
-                } else {
-                    axis['yAxis'] = {
-                        type: 'value',
-                    }
-                }
-            } else {
-                // 没有的话，就是条形图
-                if (y instanceof Array) {
-                    axis['yAxis'] = {
-                        data: y
-                    };
-                    axis['xAxis'] = {
-                        type: 'value',
-                        // ...x
-                    }
-                }
-            }
-        }
-    } else {
-        // 如果没有 x 的话，那么看是否有 y
-        if (y) {
-            if (y instanceof Array) {
-                axis['yAxis'] = {
-                    data: y
-                };
-                axis['xAxis'] = {
-                    type: 'value'
-                }
-            }
-        } else {
-            // 如果没有 x 也没有 y 的话，那么默认 x 的 type 为 category
-            axis['xAxis'] = {
-                type: 'category',
-            };
-            axis['yAxis'] = {
-                type: 'value',
-            }
-            console.log(axis['xAxis'], "axis['xAxis']")
-        }
-    }
-
-    // 这一块是样式的处理
-    if (config.x) {
-        const xAxisShow = config.x.show; // 首先查看 x 轴是否需要显示
-        if (typeof xAxisShow !== 'undefined') {
-            // 如果 xAxisShow 的值为 false 的话，后面关于 x 轴的样式就不生效了
-            if (xAxisShow === false) {
-                axis['xAxis'].show = xAxisShow;
-            } else {
-                axis['xAxis'].show = xAxisShow;
-
-                // 轴线
-                if (typeof config.x.lineStyle === 'object' && !isNullObject(config.x.lineStyle)) {
-                    const { show, color } = config.x.lineStyle;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['xAxis']['axisLine'] = {
-                                show: show
-                            }
-                        } else {
-                            axis['xAxis']['axisLine'] = {
-                                show: show,
-                                lineStyle: {
-                                    color
-                                }
-                            }
-                        }
-                    }
-                }
-                // 刻度
-                if (typeof config.x.tickStyle === 'object' && !isNullObject(config.x.tickStyle)) {
-                    const { show } = config.x.tickStyle;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['xAxis']['axisTick'] = {
-                                show: show
-                            }
-                        } else {
-                            axis['xAxis']['axisTick'] = {
-                                show: show,
-                            }
-                        }
-                    }
-                }
-                // 标签
-                if (typeof config.x.labelStyle === 'object' && !isNullObject(config.x.labelStyle)) {
-                    const { show } = config.x.labelStyle;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['xAxis']['axisLabel'] = {
-                                ...axis['xAxis'].axisLabel,
-                                show: show
-                            }
-                        } else {
-                            axis['xAxis']['axisLabel'] = {
-                                ...axis['xAxis'].axisLabel,
-                                show: show,
-                                inside: config.x.labelStyle.inside || false,
-                                rotate: config.x.labelStyle.rotate || 0,
-                                fontSize: config.x.labelStyle.fontSize || 10
-                            }
-                        }
-                    }
-                }
-                // 分割线
-                if (typeof config.x.splitLine === 'object' && !isNullObject(config.x.splitLine)) {
-                    const { show } = config.x.splitLine;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['xAxis']['splitLine'] = {
-                                show: show
-                            }
-                        } else {
-                            axis['xAxis']['splitLine'] = {
-                                show: show,
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    if (config.y) {
-        const yAxisShow = config.y.show; // 首先查看 x 轴是否需要显示
-        if (typeof yAxisShow !== 'undefined') {
-            // 如果 xAxisShow 的值为 false 的话，后面关于 x 轴的样式就不生效了
-            if (yAxisShow === false) {
-                axis['yAxis'].show = yAxisShow;
-            } else {
-                axis['yAxis'].show = yAxisShow;
-
-                // 轴线
-                if (typeof config.y.lineStyle === 'object' && !isNullObject(config.y.lineStyle)) {
-                    const { show, color } = config.y.lineStyle;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['yAxis']['axisLine'] = {
-                                show: show
-                            }
-                        } else {
-                            axis['yAxis']['axisLine'] = {
-                                show: show,
-                                lineStyle: {
-                                    color
-                                }
-                            }
-                        }
-                    }
-                }
-                // 刻度
-                if (typeof config.y.tickStyle === 'object' && !isNullObject(config.y.tickStyle)) {
-                    const { show } = config.y.tickStyle;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['yAxis']['axisTick'] = {
-                                show: show
-                            }
-                        } else {
-                            axis['yAxis']['axisTick'] = {
-                                show: show,
-                            }
-                        }
-                    }
-                }
-                // 标签
-                if (typeof config.y.labelStyle === 'object' && !isNullObject(config.y.labelStyle)) {
-                    const { show } = config.y.labelStyle;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['yAxis']['axisLabel'] = {
-                                show: show
-                            }
-                        } else {
-                            axis['yAxis']['axisLabel'] = {
-                                show: show,
-                                inside: config.x.labelStyle.inside || false,
-                                rotate: config.x.labelStyle.rotate || 0,
-                                fontSize: config.x.labelStyle.fontSize || 10
-                            }
-                        }
-                    }
-                }
-                // 分割线
-                if (typeof config.y.splitLine === 'object' && !isNullObject(config.y.splitLine)) {
-                    const { show } = config.y.splitLine;
-                    if (typeof show !== 'undefined') {
-                        if (show === false) {
-                            axis['yAxis']['splitLine'] = {
-                                show: show
-                            }
-                        } else {
-                            axis['yAxis']['splitLine'] = {
-                                show: show,
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    console.log(axis)
-    return axis;
+    // 对轴线的数据进行处理
+    axis['xAxis'] = judgementType(x, Array, processingXAxis);
+    axis['yAxis'] = judgementType(y, Array, processingYAxis);
+    // 设置完样式之后直接返回 axis 的 option
+    return setAxisStyle(axis, config);
 }
 
-const processingSeries = (series, config = {}, type) => {
+const processingSeries = (series, config = {}, type = 'bar') => {
     if ((typeof series === 'object' && isNullObject(series))) {
         return null;
     }
@@ -303,7 +48,7 @@ const processingSeries = (series, config = {}, type) => {
     } else {
         return {
             data: series.data,
-            type: series.type || type || 'bar'
+            type: series.type || type
         }
     }
 }

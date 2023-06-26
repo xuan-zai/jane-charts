@@ -45,8 +45,6 @@ const mock = reactive({
                                 location: 'after'
                             }
                         },
-                        y: {
-                        },
                         series: {
                             data: [100, 200, 100, 200, 20]
                         }
@@ -74,8 +72,8 @@ const mock = reactive({
                                 location: 'after'
                             }
                         },
-                        y: {
-                        },
+                        // y: {
+                        // },
                         series: {
                             data: [100, 200, 100, 200, 20]
                         }
@@ -360,6 +358,49 @@ const mock = reactive({
                         barStyle: {
                             width: 12,
                             round: 6
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            id: 0,
+            title: '基础条形图',
+            data: [
+                {
+                    id: 0,
+                    title: '条形图',
+                    version: '5.4.2',
+                    data: {
+                        title: {
+                            text: '简单',
+                        },
+                        x: {
+                            type: 'value'
+                        },
+                        y: {
+                            data: ["2019", "2020", "2021", "2022", '2023']
+                        },
+                        series: {
+                            data: [100, 200, 100, 200, 20]
+                        }
+                    },
+                    config: {
+                        barStyle: {
+                            width: 12,
+                            round: 3,
+                            color: {
+                                type: 'linear',
+                                x: 1,
+                                y: 0,
+                                x2: 0,
+                                y2: 0,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(0, 150, 199, 0.6)'
+                                }, {
+                                    offset: 1, color: 'rgba(255, 255, 255, 0)'
+                                }],
+                            }
                         }
                     }
                 }
