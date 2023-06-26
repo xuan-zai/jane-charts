@@ -81,6 +81,17 @@ const processing = (type: string, data = {}, config = {}) => {
         }
     }
 
+    if (config.legend) {
+        const { show = false, location = {} } = config.legend;
+
+        if (show) {
+            option['legend'] = {
+                ...location
+            }
+        }
+
+    }
+
     if (option['series'] instanceof Array) {
         option['series'].length > 0 && option['series'].forEach(ele => {
             // 判断有没有设置 color 属性
@@ -187,6 +198,8 @@ const processing = (type: string, data = {}, config = {}) => {
     option['grid'] = {
         bottom: '12%'
     }
+
+    console.log(option)
     return option;
 }
 

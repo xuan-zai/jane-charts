@@ -302,6 +302,64 @@ const mock = reactive({
                             }
                         }
                     }
+                },
+                {
+                    title: "基础图例",
+                    version: "5.4.2",
+                    data: {
+                        title: {
+                            text: '基础图例模板',
+                            sub: '通过设置 config.legend.location 来改变图例显示的位置'
+                        },
+                        x: {
+                            data: ['一', '二', '三', '四', '五', '六', '日'],
+                            unitConfig: {
+                                unit: '周',
+                                location: 'before'
+                            }
+                        },
+                        series: [
+                            {
+                                name: '2010',
+                                type: 'bar',
+                                stack: 'A',
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [220, 132, 270, 134, 90, 230, 220],
+                            },
+                            {
+                                name: '2011',
+                                type: 'bar',
+                                stack: 'Ad',
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [320, 182, 191, 234, 290, 330, 320]
+                            },
+                            {
+                                name: '2022',
+                                type: 'bar',
+                                stack: 'Ad',
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [200, 232, 300, 154, 190, 330, 232]
+                            },
+                        ]
+                    },
+                    config: {
+                        barStyle: {
+                            width: 12,
+                            round: 3
+                        },
+                        legend: {
+                            show: true,
+                            location: {
+                                right: '3%'
+                            }
+                        }
+                    }
                 }
             ]
         },

@@ -35,19 +35,19 @@ const state = reactive({
 
 onMounted(() => {
     if (barRef.value) {
-        state.chart = echarts.init(barRef.value);
+        let chart = echarts.init(barRef.value);
         let { type, data, config } = props;
         let options = processing(type, data, config)
-        options && state.chart.setOption(options)
+        options && chart.setOption(options)
     }
 });
 
-watch(props, () => {
-    let { type, data, config } = props;
-    let options = processing(type, data, config)
-    options && state.chart.setOption(options)
-    // state.startTime = state.completedNum * (state.endTime / 100);
-}, { deep: true });
+// watch(props, () => {
+//     let { type, data, config } = props;
+//     let options = processing(type, data, config)
+//     options && state.chart.setOption(options)
+//     // state.startTime = state.completedNum * (state.endTime / 100);
+// }, { deep: true });
 
 </script>
   
