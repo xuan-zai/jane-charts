@@ -187,6 +187,16 @@ const processing = (type: string, data = {}, config = {}) => {
                 }
             }
         }
+
+        if (config.lineStyle) {
+            for (const key in option['series']) {
+                if(typeof config.lineStyle.smooth !== 'undefined') {
+                    option['series'].smooth = config.lineStyle.smooth
+                }
+            }
+        }
+
+
         // 判断有没有设置动画属性
         if (config.animation) {
             const { delay } = config.animation;

@@ -51,9 +51,36 @@ const mock = reactive({
                         }
                     },
                     config: {
-                        barStyle: {
+                        lineStyle: {
                             width: 12,
                             round: 20
+                        }
+                    }
+                },
+                {
+                    id: 1,
+                    title: '基础曲线图',
+                    version: '5.4.2',
+                    data: {
+                        title: {
+                            text: '曲线',
+                        },
+                        x: {
+                            data: ["2019", "2020", "2021", "2022", '2023'],
+                            unitConfig: {
+                                unit: '年',
+                                location: 'after'
+                            }
+                        },
+                        y: {
+                        },
+                        series: {
+                            data: [100, 200, 100, 200, 20],
+                        }
+                    },
+                    config: {
+                        lineStyle: {
+                            smooth: true
                         }
                     }
                 }
