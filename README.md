@@ -23,7 +23,7 @@
 > 所有的图例，都是有组件生成的，不是图片。
 ![Alt text](image.png)
 ![Alt text](image-1.png)
-![Alt text](image-2.png)
+![Alt text](image-3.png)
 ## 预览
 
 - 克隆本项目
