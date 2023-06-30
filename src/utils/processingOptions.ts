@@ -83,13 +83,11 @@ const processing = (type: string, data = {}, config = {}) => {
 
     if (config.legend) {
         const { show = false, location = {} } = config.legend;
-
         if (show) {
             option['legend'] = {
                 ...location
             }
         }
-
     }
 
     if (option['series'] instanceof Array) {
@@ -145,7 +143,18 @@ const processing = (type: string, data = {}, config = {}) => {
                     if (typeof config.lineStyle.smooth !== 'undefined') {
                         ele.smooth = config.lineStyle.smooth
                     }
+
+                    if (!isNullObject(config.lineStyle) && !isNullObject(config.lineStyle.area) && config.lineStyle.area) {
+                        if (typeof config.lineStyle.area.show !== 'undefined') {
+                            if (config.lineStyle.area.show) {
+                                ele.areaStyle = {
+                                    opacity: 0.3,
+                                }
+                            }
+                        }
+                    }
                 }
+
             }
         })
         // 
@@ -202,6 +211,19 @@ const processing = (type: string, data = {}, config = {}) => {
                     option['series'].smooth = config.lineStyle.smooth
                 }
             }
+
+            for (const key in option['series']) {
+                if (!isNullObject(config.lineStyle) && !isNullObject(config.lineStyle.area) && config.lineStyle.area) {
+                    console.log(config.lineStyle.area.show)
+                    if (typeof config.lineStyle.area.show !== 'undefined') {
+                        if (config.lineStyle.area.show) {
+                            option['series'].areaStyle = {
+                                opacity: 0.3,
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -216,8 +238,6 @@ const processing = (type: string, data = {}, config = {}) => {
     option['grid'] = {
         bottom: '12%'
     }
-
-    console.log(option)
     return option;
 }
 

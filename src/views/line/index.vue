@@ -133,6 +133,59 @@ const mock = reactive({
                             smooth: true
                         }
                     }
+                },
+                {
+                    id: 1,
+                    title: '基础堆叠曲线图',
+                    version: '5.4.2',
+                    data: {
+                        title: {
+                            text: '堆叠曲线',
+                        },
+                        x: {
+                            data: ["2019", "2020", "2021", "2022", '2023'],
+                            unitConfig: {
+                                unit: '年',
+                                location: 'after'
+                            }
+                        },
+                        y: {
+                        },
+                        series: [
+                            {
+                                name: '2010',
+                                type: 'line',
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [3, 5, 9, 3, 8, 12, 10, 23],
+                            },
+                            {
+                                name: '2011',
+                                type: 'line',
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [23, 10, 12, 8, 3, 9, 5, 3]
+                            },
+                            {
+                                name: '2022',
+                                type: 'line',
+                                emphasis: {
+                                    focus: 'series'
+                                },
+                                data: [10, 9, 23, 5, 3, 12, 8, 3]
+                            },
+                        ]
+                    },
+                    config: {
+                        lineStyle: {
+                            smooth: true,
+                            area: {
+                                show: true
+                            }
+                        }
+                    }
                 }
             ]
         }
