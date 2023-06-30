@@ -360,7 +360,35 @@ const mock = reactive({
                             }
                         }
                     }
-                }
+                },
+                {
+                    id: 0,
+                    title: '显示最大最小值',
+                    version: '5.4.2',
+                    data: {
+                        title: {
+                            text: '最大最小值',
+                        },
+                        x: {
+                            data: ["2019", "2020", "2021", "2022", '2023'],
+                            unitConfig: {
+                                unit: '年',
+                                location: 'after'
+                            }
+                        },
+                        series: {
+                            data: [100, 200, 100, 200, 20]
+                        }
+                    },
+                    config: {
+                        barStyle: {
+                            width: 12,
+                            round: 20
+                        },
+                        showMax: true,
+                        showMin: true
+                    }
+                },
             ]
         },
         {

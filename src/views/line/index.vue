@@ -192,7 +192,36 @@ const mock = reactive({
                             }
                         }
                     }
-                }
+                },
+                {
+                    id: 1,
+                    title: '显示最大最小值',
+                    version: '5.4.2',
+                    data: {
+                        title: {
+                            text: '最大最小值',
+                        },
+                        x: {
+                            data: ["2019", "2020", "2021", "2022", '2023'],
+                            unitConfig: {
+                                unit: '年',
+                                location: 'after'
+                            }
+                        },
+                        y: {
+                        },
+                        series: {
+                            data: [100, 300, 100, 200, 20],
+                        }
+                    },
+                    config: {
+                        lineStyle: {
+                            smooth: true
+                        },
+                        showMax: true,
+                        showMin: true
+                    }
+                },
             ]
         }
     ]

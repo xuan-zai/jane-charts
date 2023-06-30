@@ -214,7 +214,6 @@ const processing = (type: string, data = {}, config = {}) => {
 
             for (const key in option['series']) {
                 if (!isNullObject(config.lineStyle) && !isNullObject(config.lineStyle.area) && config.lineStyle.area) {
-                    console.log(config.lineStyle.area.show)
                     if (typeof config.lineStyle.area.show !== 'undefined') {
                         if (config.lineStyle.area.show) {
                             option['series'].areaStyle = {
@@ -223,6 +222,36 @@ const processing = (type: string, data = {}, config = {}) => {
                         }
                     }
                 }
+            }
+        }
+
+        if (typeof config.showMax !== 'undefined') {
+            if (config.showMax) {
+                option['series'].markPoint = {
+                    data: [
+                        { type: 'max', name: '最大值' },
+                    ],
+                }
+            }
+        }
+
+        if (typeof config.showMin !== 'undefined') {
+            if (config.showMin) {
+                if (config.showMax) {
+                    option['series'].markPoint = {
+                        data: [
+                            { type: 'max', name: '最大值' },
+                            { type: 'min', name: '最小值' },
+                        ],
+                    }
+                } else {
+                    option['series'].markPoint = {
+                        data: [
+                            { type: 'min', name: '最小值' },
+                        ],
+                    }
+                }
+
             }
         }
 
