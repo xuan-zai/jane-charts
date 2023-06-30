@@ -148,7 +148,7 @@ const processing = (type: string, data = {}, config = {}) => {
                         if (typeof config.lineStyle.area.show !== 'undefined') {
                             if (config.lineStyle.area.show) {
                                 ele.areaStyle = {
-                                    opacity: 0.3,
+                                    opacity: 0.1,
                                 }
                             }
                         }
@@ -218,7 +218,7 @@ const processing = (type: string, data = {}, config = {}) => {
                     if (typeof config.lineStyle.area.show !== 'undefined') {
                         if (config.lineStyle.area.show) {
                             option['series'].areaStyle = {
-                                opacity: 0.3,
+                                opacity: 0.1,
                             }
                         }
                     }

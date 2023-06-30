@@ -64,6 +64,7 @@ const mock = reactive({
                     data: {
                         title: {
                             text: '曲线',
+                            sub: '通过设置 config.lineStyle.smooth 来设置是否显示曲线'
                         },
                         x: {
                             data: ["2019", "2020", "2021", "2022", '2023'],
@@ -141,6 +142,7 @@ const mock = reactive({
                     data: {
                         title: {
                             text: '堆叠曲线',
+                            sub: '通过设置 config.lineStyle.area.show 来设置是否堆叠'
                         },
                         x: {
                             data: ["2019", "2020", "2021", "2022", '2023'],
@@ -174,11 +176,12 @@ const mock = reactive({
                                 emphasis: {
                                     focus: 'series'
                                 },
-                                data: [10, 9, 23, 5, 3, 12, 8, 3]
+                                data: [10, 3, 23, 5, 9, 12, 8, 12]
                             },
                         ]
                     },
                     config: {
+                        color: ['#0A9396', '#1a9bfc', '#99da69'],
                         lineStyle: {
                             smooth: true,
                             area: {
