@@ -157,6 +157,7 @@ const mock = reactive({
                             {
                                 name: '2010',
                                 type: 'line',
+                                stack: 'ad',
                                 emphasis: {
                                     focus: 'series'
                                 },
@@ -165,6 +166,7 @@ const mock = reactive({
                             {
                                 name: '2011',
                                 type: 'line',
+                                stack: 'ad',
                                 emphasis: {
                                     focus: 'series'
                                 },
@@ -173,6 +175,7 @@ const mock = reactive({
                             {
                                 name: '2022',
                                 type: 'line',
+                                stack: 'ad',
                                 emphasis: {
                                     focus: 'series'
                                 },
