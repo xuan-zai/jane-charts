@@ -139,6 +139,14 @@ const processing = (type: string, data = {}, config = {}) => {
                     }
                 }
             }
+
+            if (config.lineStyle) {
+                for (const key in ele) {
+                    if (typeof config.lineStyle.smooth !== 'undefined') {
+                        ele.smooth = config.lineStyle.smooth
+                    }
+                }
+            }
         })
         // 
     } else {
@@ -190,7 +198,7 @@ const processing = (type: string, data = {}, config = {}) => {
 
         if (config.lineStyle) {
             for (const key in option['series']) {
-                if(typeof config.lineStyle.smooth !== 'undefined') {
+                if (typeof config.lineStyle.smooth !== 'undefined') {
                     option['series'].smooth = config.lineStyle.smooth
                 }
             }
